@@ -8,6 +8,8 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
+import java.lang.reflect.Method;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
@@ -35,4 +37,20 @@ public class LruBitmapCacheTest {
         Mockito.when(mMockContext.getResources().getDisplayMetrics()).thenReturn(mockDM);
         assertThat(LruBitmapCache.getCacheSize(mMockContext),  is(equalTo(3 * mockDM.widthPixels * mockDM.heightPixels * 4)));
     }
+
+//    Tests private version of getCacheSize
+//    @Test
+//    public void getCacheSizeTest() throws Exception {
+//        mMockContext = Mockito.mock(Context.class, Mockito.RETURNS_DEEP_STUBS);
+//        DisplayMetrics mockDM = Mockito.mock(DisplayMetrics.class, Mockito.RETURNS_DEEP_STUBS);
+//        mockDM.widthPixels = 50;
+//        mockDM.heightPixels = 100;
+//        Mockito.when(mMockContext.getResources().getDisplayMetrics()).thenReturn(mockDM);
+//
+//        LruBitmapCache cache = new LruBitmapCache(Integer.MAX_VALUE);
+//
+//        Method method = cache.getClass().getDeclaredMethod("getCacheSize", Context.class);
+//        method.setAccessible(true);
+//        assertThat((Integer) method.invoke(cache, mMockContext), is(equalTo(3 * mockDM.widthPixels * mockDM.heightPixels * 4)));
+//    }
 }
